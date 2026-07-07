@@ -132,6 +132,15 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
   footer{padding:32px 20px}
   .footer-inner{flex-direction:column;align-items:flex-start}
 }
+
+.faq-item{border-bottom:1.5px solid #E2E8F0;background:white}
+.faq-item:last-child{border-bottom:none}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:none;border:none;font-size:15px;font-weight:600;color:#0F172A;cursor:pointer;text-align:left;font-family:inherit;gap:16px;transition:background .15s}
+.faq-q:hover{background:#F8FAFC}
+.faq-icon{flex-shrink:0;transition:transform .25s;color:#64748B}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .25s;font-size:14px;color:#475569;line-height:1.75;padding:0 24px}
+.faq-item.open .faq-icon{transform:rotate(180deg)}
+.faq-item.open .faq-a{max-height:300px;padding:0 24px 20px}
 </style>
 </head>
 <body>
@@ -315,6 +324,24 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
   </div>
 </section>
 
+
+<!-- FAQ -->
+<section style="padding:96px 40px;background:#F8FAFC;border-top:1px solid #E2E8F0" id="faq">
+  <div style="max-width:780px;margin:0 auto">
+    <p style="font-size:12px;font-weight:700;color:#3B82F6;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px">Vanliga frågor</p>
+    <h2 style="font-size:clamp(28px,3.5vw,40px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;color:#0F172A;margin-bottom:48px">Frågor om Chartsearch</h2>
+    <div style="display:flex;flex-direction:column;border:1.5px solid #E2E8F0;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04)">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vad är Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är ett AI-drivet journalsökverktyg utvecklat av NMedtech AB för svensk slutenvård. Chartsearch låter kliniker söka i patientjournaler med naturligt språk och få strukturerade svar med källhänvisning på sekunder – istället för att manuellt bläddra igenom långa journalanteckningar från flera vårdtillfällen.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Hur fungerar Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Klinikern ställer en fråga på naturlig svenska – till exempel "Varför är furosemid upptitrerad?" eller "Finns dokumenterad behandlingsbegränsning?" – och Chartsearch analyserar journalanteckningar, labbsvar och konsultationssvar för att ge ett direkt svar med källhänvisning till exakt anteckning, datum och ansvarig vårdgivare.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Är Chartsearch säkert och GDPR-kompatibelt?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är designat med patientdatasäkerhet som utgångspunkt och följer Patientdatalagen (PDL) och GDPR. Exakt datahantering anpassas i samråd med varje kliniks IT-säkerhetsorganisation. Under pilotfasen körs Chartsearch enbart med simulerade testpatienter – ingen riktig patientdata hanteras utan godkänt avtal och teknisk granskning.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vilka journalsystem fungerar Chartsearch med?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är primärt designat för TakeCare (Region Stockholm) och Cosmic OPUS (Cambio) – de journalsystem som dominerar svensk slutenvård. Integration mot specifika system sker i samarbete med klinikens IT-avdelning.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Kan Chartsearch ge kliniska rekommendationer?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Nej. Chartsearch är ett beslutsstödsverktyg – det söker och presenterar dokumenterad information men drar inga egna kliniska slutsatser och ger inga behandlingsrekommendationer. Klinikern fattar alltid det medicinska beslutet. Varje svar innehåller en tydlig disclaimer om detta.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Hur kan vi testa Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Vi erbjuder en kostnadsfri pilot med simulerade testpatienter. Det kräver ingen IT-avdelning, inga avtal och ingen installation. Boka en 30-minutersdemo via knappen ovan eller kontakta oss på nmedtech@outlook.com.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vem har utvecklat Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är utvecklat av NMedtech AB, grundat i Stockholm 2025 av en läkarstudent med klinisk erfarenhet från svensk slutenvård. Chartsearch är byggt inifrån vården, av någon som dagligen sett hur mycket tid kliniker lägger på att navigera journalsystem istället för att vara hos patienten.</div></div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-inner">
     <div class="footer-logo"><div class="footer-logo-mark"><svg width="16" height="16" viewBox="0 0 120 120"><rect x="18" y="36" width="84" height="56" rx="6" fill="none" stroke="white" stroke-width="6"/><line x1="28" y1="50" x2="60" y2="50" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.6"/><line x1="28" y1="60" x2="60" y2="60" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.6"/><line x1="28" y1="70" x2="46" y2="70" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.4"/><rect x="36" y="108" width="48" height="11" rx="3" fill="none" stroke="white" stroke-width="5" opacity="0.7"/><line x1="48" y1="103" x2="72" y2="103" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.5"/><circle cx="82" cy="86" r="19" fill="#0A2540" stroke="white" stroke-width="6"/><text x="82" y="92" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="white" text-anchor="middle">CS</text><line x1="96" y1="100" x2="106" y2="110" stroke="white" stroke-width="6" stroke-linecap="round"/></svg></div>Chartsearch · NMedtech AB</div>
@@ -337,6 +364,13 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
 </div>
 
 <script>
+function toggleFaq(btn){
+  var item=btn.parentElement;
+  var wasOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+  if(!wasOpen)item.classList.add('open');
+}
+
 function openCal(){
   document.getElementById('CAL-FRAME').src='https://calendly.com/nmedtech/30min';
   document.getElementById('CAL').classList.add('open');
