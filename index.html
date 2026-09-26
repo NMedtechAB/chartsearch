@@ -23,6 +23,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;ali
 .nav-links a:hover{color:#0F172A;background:#F1F5F9}
 .nav-cta{background:#0F4C81;color:white!important;padding:8px 20px;border-radius:8px;font-weight:600!important;cursor:pointer}
 .nav-cta:hover{opacity:.88;background:#0F4C81!important}
+nav.scrolled{box-shadow:0 1px 12px rgba(15,23,42,.06)}
 
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:100px 40px 80px;background:linear-gradient(180deg,#F8FAFC 0%,#EFF6FF 50%,#DBEAFE 100%);text-align:center}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:white;border:1px solid #BFDBFE;border-radius:100px;padding:6px 16px;font-size:13px;font-weight:500;color:#1D4ED8;margin-bottom:28px}
@@ -34,7 +35,7 @@ h1 .gradient{background:linear-gradient(135deg,#0F4C81,#3B82F6);-webkit-backgrou
 .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:#0F4C81;color:white;padding:15px 32px;border-radius:10px;font-weight:600;font-size:16px;text-decoration:none;border:none;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(15,76,129,.3)}
 .btn-primary:hover{opacity:.9}
-.btn-secondary{display:inline-flex;align-items:center;background:white;color:#0F172A;padding:15px 32px;border-radius:10px;font-weight:600;font-size:16px;text-decoration:none;border:1.5px solid #E2E8F0}
+.btn-secondary{display:inline-flex;align-items:center;background:white;color:#0F172A;padding:15px 32px;border-radius:10px;font-weight:600;font-size:16px;text-decoration:none;border:1.5px solid #E2E8F0;cursor:pointer;font-family:inherit}
 .btn-secondary:hover{background:#F8FAFC}
 
 .demo-container{max-width:680px;width:100%;margin:0 auto;text-align:left}
@@ -127,7 +128,8 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
 
 @media(max-width:768px){
   nav{padding:0 20px}
-  .nav-links{display:none}
+  .nav-links li:not(:last-child){display:none}
+  .nav-cta{padding:7px 14px}
   .hero,.stats,.how,.features,.security,.about,.cta{padding:64px 20px}
   .stats-grid,.steps,.features-grid,.security-grid,.about-inner{grid-template-columns:1fr}
   footer{padding:32px 20px}
@@ -141,7 +143,61 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
 .faq-icon{flex-shrink:0;transition:transform .25s;color:#64748B}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .25s;font-size:14px;color:#475569;line-height:1.75;padding:0 24px}
 .faq-item.open .faq-icon{transform:rotate(180deg)}
-.faq-item.open .faq-a{max-height:300px;padding:0 24px 20px}
+.faq-item.open .faq-a{max-height:800px;padding:0 24px 20px}
+
+/* Kontakta oss */
+.contact-overlay{position:fixed;inset:0;z-index:9998;background:#F8FAFC;overflow-y:auto;display:none}
+.contact-overlay.open{display:block}
+.contact-top{position:sticky;top:0;z-index:2;height:64px;display:flex;align-items:center;justify-content:center;background:rgba(248,250,252,.95);border-bottom:1px solid #E2E8F0}
+.contact-close{position:absolute;right:24px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:10px;border:1px solid #E2E8F0;background:white;font-size:16px;color:#475569;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.contact-close:hover{background:#F1F5F9;color:#0F172A}
+.contact-grid{max-width:1160px;margin:0 auto;padding:56px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.contact-pitch h2{font-size:clamp(28px,3vw,40px);letter-spacing:-1.2px;margin-bottom:40px}
+.contact-points{list-style:none;display:flex;flex-direction:column;gap:28px}
+.contact-point{display:grid;grid-template-columns:26px 1fr;gap:14px}
+.contact-point svg{margin-top:2px}
+.contact-point h3{font-size:17px;font-weight:700;color:#0F172A;margin-bottom:6px}
+.contact-point p{font-size:15px;color:#64748B;line-height:1.7}
+.contact-card{background:white;border:1px solid #E2E8F0;border-radius:24px;padding:48px 44px;box-shadow:0 8px 40px rgba(15,76,129,.08);scroll-margin-top:80px}
+.contact-card [hidden]{display:none!important}
+.contact-card-head{text-align:center;margin-bottom:32px}
+.contact-card-head h2{font-size:30px;letter-spacing:-.8px;margin-bottom:8px}
+.contact-card-head p{font-size:15px;color:#64748B;line-height:1.6}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}
+.cf-field{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.cf-field label{font-size:13px;font-weight:500;color:#334155}
+.cf-opt{color:#94A3B8;font-weight:400}
+.cf-input{width:100%;height:48px;border:1.5px solid #E2E8F0;border-radius:10px;padding:0 14px;font-size:16px;font-family:inherit;color:#0F172A;background:white;transition:border-color .15s,box-shadow .15s}
+.cf-input::placeholder{color:#94A3B8}
+.cf-input:focus{outline:none;border-color:#3B82F6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+select.cf-input{appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer;background:white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 14px center}
+select.cf-input.cf-empty{color:#94A3B8}
+select.cf-input option{color:#0F172A}
+textarea.cf-input{height:120px;padding:12px 14px;resize:vertical;line-height:1.5}
+.cf-consent{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:#475569;line-height:1.55;margin:4px 0 28px;cursor:pointer}
+.cf-consent input{width:18px;height:18px;margin-top:1px;accent-color:#0F4C81;flex-shrink:0;cursor:pointer}
+.cf-submit{display:block;margin:0 auto;min-width:160px;height:52px;padding:0 36px;border-radius:100px;background:#0F4C81;color:white;border:none;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px rgba(15,76,129,.3)}
+.cf-submit:hover{opacity:.9}
+.cf-submit:disabled{opacity:.6;cursor:default}
+.cf-err{margin-top:16px;padding:12px 14px;border-radius:10px;background:#FEF2F2;border:1px solid #FECACA;color:#B91C1C;font-size:14px;text-align:center}
+.cf-err a{color:inherit}
+.cf-alt{text-align:center;font-size:14px;color:#64748B;margin-top:20px}
+.cf-alt button{background:none;border:none;color:#3B82F6;font:inherit;font-weight:500;cursor:pointer;padding:0}
+.cf-alt button:hover{text-decoration:underline}
+.cf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cf-done{text-align:center;padding:40px 0}
+.cf-done-ico{width:56px;height:56px;border-radius:50%;background:#EFF6FF;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.cf-done h3{font-size:24px;font-weight:800;letter-spacing:-.6px;margin-bottom:10px}
+.cf-done p{font-size:15px;color:#64748B;line-height:1.7;margin-bottom:28px}
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr;gap:40px;padding:32px 20px 56px}
+  .contact-card{padding:32px 20px;border-radius:20px}
+  .contact-pitch h2{margin-bottom:28px}
+}
+@media(max-width:560px){
+  .cf-row{grid-template-columns:1fr}
+  .contact-close{right:16px}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -166,7 +222,8 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
     <li><a href="#hur">Hur det fungerar</a></li>
     <li><a href="#sakerhet">Säkerhet</a></li>
     <li><a href="#om">Om oss</a></li>
-    <li><a class="nav-cta" onclick="openCal()" style="cursor:pointer">Boka demo</a></li>
+    <li><a href="#kontakta-oss" onclick="openContact();return false">Kontakta oss</a></li>
+    <li><a class="nav-cta" href="#boka-demo" onclick="openCal();return false">Boka demo</a></li>
   </ul>
 </nav>
 
@@ -226,8 +283,8 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
       </div>
       <div class="stat-card">
         <div class="stat-num">2:1</div>
-        <div class="stat-desc">är förhållandet mellan tid i journalsystemet och direkt patientvård – nästan två timmar i systemet per timme med patienten.</div>
-        <div class="stat-src">Källa: Berta et al., arXiv:2603.23513, 2025</div>
+        <div class="stat-desc">är förhållandet mellan journal- och skrivbordsarbete och direkt patientvård – nästan två timmar vid datorn per timme med patienten.</div>
+        <div class="stat-src">Källa: Sinsky et al., Annals of Internal Medicine, 2016</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">&lt;5 s</div>
@@ -329,8 +386,10 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
     <p class="section-eyebrow" style="margin-bottom:12px">Kom igång</p>
     <h2>Redo att se Chartsearch<br>i ert journalsystem?</h2>
     <p>Vi kör en demo i er miljö med testdata. Hör av er så bokar vi 30 minuter.</p>
-    <button class="btn-primary" onclick="openCal()" style="font-size:16px">Boka demo</button>
-    <br>
+    <div class="hero-ctas" style="margin-bottom:8px">
+      <button class="btn-primary" onclick="openCal()">Boka demo</button>
+      <button class="btn-secondary" onclick="openContact()">Kontakta oss</button>
+    </div>
     <a href="mailto:nmedtech@outlook.com" class="cta-email">nmedtech@outlook.com</a>
   </div>
 </section>
@@ -345,10 +404,10 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vad är Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är ett AI-drivet journalsökverktyg. Läkare söker i patientjournaler och får strukturerade svar med källhänvisningar på sekunder – istället för att manuellt bläddra igenom långa journalanteckningar från flera vårdtillfällen.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Hur fungerar Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är inbyggt direkt i journalsystemet. Klinikern skriver eller ställer en fråga, precis som man skulle fråga en kollega, och Chartsearch läser igenom hela patientens journal (anteckningar, labbsvar, läkemedel och konsultationer) för att ge ett samlat, direkt svar. Varje svar visar exakt vilken anteckning, vilket datum och vilken vårdgivare informationen kommer från, så att man alltid kan verifiera mot originalkällan.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Är Chartsearch säkert och GDPR-kompatibelt?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är designat med patientdatasäkerhet som utgångspunkt och följer Patientdatalagen (PDL) och GDPR. Exakt datahantering anpassas i samråd med varje kliniks IT-säkerhetsorganisation. Under pilotfasen körs Chartsearch enbart med simulerade testpatienter – ingen riktig patientdata hanteras utan godkänt avtal och teknisk granskning.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vilka journalsystem fungerar Chartsearch med?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är primärt designat för TakeCare (Region Stockholm) och Cosmic OPUS (Cambio) – de journalsystem som dominerar svensk sjukvård Integration mot specifika system sker i samarbete med klinikens IT-avdelning.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vilka journalsystem fungerar Chartsearch med?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är primärt designat för TakeCare (Region Stockholm) och Cosmic OPUS (Cambio) – de journalsystem som dominerar svensk sjukvård. Integration mot specifika system sker i samarbete med klinikens IT-avdelning.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Kan Chartsearch ge kliniska rekommendationer?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Nej. Chartsearch är ett beslutsstödsverktyg – det söker och presenterar dokumenterad information men drar inga egna kliniska slutsatser och ger inga behandlingsrekommendationer. Klinikern fattar alltid det medicinska beslutet. Varje svar innehåller en tydlig disclaimer om detta.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Hur kan vi testa Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Vi erbjuder en kostnadsfri pilot med simulerade testpatienter. Det kräver ingen IT-avdelning, inga avtal och ingen installation. Boka en 30-minutersdemo via knappen ovan eller kontakta oss på nmedtech@outlook.com.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vem har utvecklat Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är utvecklat av NMedtech AB, grundat i Stockholm 2026 av en läkarstudent med klinisk erfarenhet från svensk sjukvård Chartsearch är byggt inifrån vården, av någon som dagligen sett hur mycket tid kliniker lägger på att navigera journalsystem istället för att vara hos patienten.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Vem har utvecklat Chartsearch?<svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-a">Chartsearch är utvecklat av NMedtech AB, grundat i Stockholm 2026 av en läkarstudent med klinisk erfarenhet från svensk sjukvård. Chartsearch är byggt inifrån vården, av någon som dagligen sett hur mycket tid kliniker lägger på att navigera journalsystem istället för att vara hos patienten.</div></div>
     </div>
   </div>
 </section>
@@ -357,8 +416,8 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
   <div class="footer-inner">
     <div class="footer-logo"><div class="footer-logo-mark"><svg width="16" height="16" viewBox="0 0 120 120"><rect x="18" y="36" width="84" height="56" rx="6" fill="none" stroke="white" stroke-width="6"/><line x1="28" y1="50" x2="60" y2="50" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.6"/><line x1="28" y1="60" x2="60" y2="60" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.6"/><line x1="28" y1="70" x2="46" y2="70" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.4"/><rect x="36" y="108" width="48" height="11" rx="3" fill="none" stroke="white" stroke-width="5" opacity="0.7"/><line x1="48" y1="103" x2="72" y2="103" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.5"/><circle cx="82" cy="86" r="19" fill="#0A2540" stroke="white" stroke-width="6"/><text x="82" y="92" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="white" text-anchor="middle">CS</text><line x1="96" y1="100" x2="106" y2="110" stroke="white" stroke-width="6" stroke-linecap="round"/></svg></div>Chartsearch · NMedtech AB</div>
     <div class="footer-links">
-      <a href="mailto:nmedtech@outlook.com">Kontakt</a>
-      <a onclick="openCal()" style="cursor:pointer">Boka demo</a>
+      <a href="#kontakta-oss" onclick="openContact();return false">Kontakta oss</a>
+      <a href="#boka-demo" onclick="openCal();return false">Boka demo</a>
     </div>
     <span style="font-size:13px">© 2026 NMedtech AB · Stockholm, Sverige</span>
   </div>
@@ -371,6 +430,86 @@ footer{background:#0B1F3A;color:rgba(255,255,255,.5);padding:40px}
       <button class="cal-close" onclick="closeCal()">✕</button>
     </div>
     <iframe class="cal-iframe" id="CAL-FRAME" src=""></iframe>
+  </div>
+</div>
+
+<!-- KONTAKTA OSS -->
+<div id="CONTACT" class="contact-overlay" role="dialog" aria-modal="true" aria-labelledby="CONTACT-TITLE">
+  <div class="contact-top">
+    <a href="#" class="nav-logo" onclick="closeContact();return false" aria-label="Tillbaka till startsidan">
+      <div class="nav-logo-mark"><svg width="20" height="20" viewBox="0 0 120 120"><rect x="18" y="36" width="84" height="56" rx="6" fill="none" stroke="white" stroke-width="6"/><line x1="28" y1="50" x2="60" y2="50" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.6"/><line x1="28" y1="60" x2="60" y2="60" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.6"/><line x1="28" y1="70" x2="46" y2="70" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.4"/><rect x="36" y="108" width="48" height="11" rx="3" fill="none" stroke="white" stroke-width="5" opacity="0.7"/><line x1="48" y1="103" x2="72" y2="103" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.5"/><circle cx="82" cy="86" r="19" fill="#0A2540" stroke="white" stroke-width="6"/><text x="82" y="92" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="white" text-anchor="middle">CS</text><line x1="96" y1="100" x2="106" y2="110" stroke="white" stroke-width="6" stroke-linecap="round"/></svg></div>
+      <span class="nav-logo-name">Chartsearch</span>
+    </a>
+    <button class="contact-close" onclick="closeContact()" aria-label="Stäng">✕</button>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-pitch">
+      <h2>Fråga journalen – och se exakt var svaret står.</h2>
+      <ul class="contact-points">
+        <li class="contact-point">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div><h3>Fråga som till en kollega</h3><p>Skriv eller diktera frågan på svenska, till exempel ”Varför avstår man från spironolakton?”. Läkemedel, allergier, diagnoser och vitalparametrar får du med ett klick.</p></div>
+        </li>
+        <li class="contact-point">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M8 13h8M8 17h5"/></svg>
+          <div><h3>Källan markerad i journalen</h3><p>Varje svar har en källhänvisning. Klicka på den så öppnas anteckningen med det citerade stycket markerat – kontrollerat på sekunder.</p></div>
+        </li>
+        <li class="contact-point">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F4C81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <div><h3>Bara det som står i journalen</h3><p>Saknas uppgiften svarar Chartsearch ”Ej dokumenterat i journalen” i stället för att gissa. Inga behandlingsråd, inga prognoser – beslutet är alltid ditt.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="contact-card">
+      <div class="contact-card-head" id="CONTACT-HEAD">
+        <h2 id="CONTACT-TITLE">Kontakta oss</h2>
+        <p>Frågor om Chartsearch eller intresse för piloten? Fyll i formuläret så återkommer vi.</p>
+      </div>
+      <form id="CONTACT-FORM">
+        <div class="cf-row">
+          <div class="cf-field"><label for="CF-FN">Förnamn</label><input class="cf-input" id="CF-FN" name="fornamn" autocomplete="given-name" placeholder="t.ex. Anna" required></div>
+          <div class="cf-field"><label for="CF-EN">Efternamn</label><input class="cf-input" id="CF-EN" name="efternamn" autocomplete="family-name" placeholder="t.ex. Lindqvist" required></div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-field"><label for="CF-EMAIL">E-post</label><input class="cf-input" id="CF-EMAIL" name="email" type="email" autocomplete="email" placeholder="namn@region.se" required></div>
+          <div class="cf-field"><label for="CF-TEL">Telefonnummer <span class="cf-opt">(valfritt)</span></label><input class="cf-input" id="CF-TEL" name="telefon" type="tel" autocomplete="tel" placeholder="070-123 45 67"></div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-field"><label for="CF-ORG">Klinik eller organisation</label><input class="cf-input" id="CF-ORG" name="organisation" autocomplete="organization" placeholder="t.ex. Karolinska" required></div>
+          <div class="cf-field"><label for="CF-SIZE">Klinikstorlek <span class="cf-opt">(valfritt)</span></label>
+            <select class="cf-input cf-empty" id="CF-SIZE" name="klinikstorlek" onchange="this.classList.toggle('cf-empty',!this.value)">
+              <option value="">Välj storlek</option>
+              <option>1–10 medarbetare</option>
+              <option>11–50 medarbetare</option>
+              <option>51–200 medarbetare</option>
+              <option>Fler än 200 medarbetare</option>
+            </select>
+          </div>
+        </div>
+        <div class="cf-field"><label for="CF-LAND">Land</label>
+          <select class="cf-input" id="CF-LAND" name="land">
+            <option selected>Sverige</option>
+            <option>Norge</option>
+            <option>Danmark</option>
+            <option>Finland</option>
+            <option>Annat land</option>
+          </select>
+        </div>
+        <div class="cf-field"><label for="CF-MSG">Vad är du intresserad av?</label><textarea class="cf-input" id="CF-MSG" name="meddelande" rows="4" placeholder="T.ex. en pilot på er avdelning, en demo eller frågor om säkerhet" required></textarea></div>
+        <input class="cf-hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="_subject" value="Ny kontaktförfrågan – chartsearch.se">
+        <label class="cf-consent"><input type="checkbox" name="samtycke" value="ja" required><span>Jag godkänner att NMedtech AB kontaktar mig och behandlar mina uppgifter för att besvara förfrågan. Uppgifterna delas inte vidare och raderas på begäran via nmedtech@outlook.com.</span></label>
+        <button type="submit" class="cf-submit">Skicka</button>
+        <p class="cf-err" id="CONTACT-ERR" role="alert" hidden></p>
+        <p class="cf-alt">Hellre en demo direkt? <button type="button" onclick="contactToCal()">Boka 30 minuter →</button></p>
+      </form>
+      <div class="cf-done" id="CONTACT-DONE" hidden>
+        <div class="cf-done-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F4C81" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 12 10 17 19 7"/></svg></div>
+        <h3 id="CONTACT-DONE-TITLE"></h3>
+        <p id="CONTACT-DONE-TEXT"></p>
+        <button class="btn-secondary" onclick="closeContact()">Tillbaka till sidan</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -392,6 +531,99 @@ function closeCal(){
   document.getElementById('CAL-FRAME').src='';
   document.body.style.overflow='';
 }
+
+// Kontaktformulär. Är CONTACT_ENDPOINT tom öppnas besökarens e-postprogram med
+// meddelandet förifyllt. Klistra in en formulärtjänst-URL (t.ex. Formspree:
+// 'https://formspree.io/f/xxxxxxx') så skickas formuläret direkt istället.
+var CONTACT_ENDPOINT='https://formspree.io/f/xgavlber';
+var CONTACT_EMAIL='nmedtech@outlook.com';
+
+function openContact(){
+  var ov=document.getElementById('CONTACT');
+  ov.classList.add('open');
+  ov.scrollTop=0;
+  document.body.style.overflow='hidden';
+  setContactHash(true);
+}
+// Visar #kontakta-oss i adressfältet så länken kan delas. Tyst om webbläsaren
+// inte tillåter det (t.ex. när sidan öppnas som lokal fil).
+function setContactHash(on){
+  try{
+    if(on&&location.hash!=='#kontakta-oss')history.replaceState(null,'','#kontakta-oss');
+    if(!on&&location.hash==='#kontakta-oss')history.replaceState(null,'',location.pathname+location.search);
+  }catch(e){}
+}
+function closeContact(){
+  document.getElementById('CONTACT').classList.remove('open');
+  document.body.style.overflow='';
+  // Efter skickat formulär: nollställ så det är tomt nästa gång
+  if(!document.getElementById('CONTACT-DONE').hidden){
+    document.getElementById('CONTACT-FORM').reset();
+    document.getElementById('CF-SIZE').classList.add('cf-empty');
+    document.getElementById('CONTACT-FORM').hidden=false;
+    document.getElementById('CONTACT-HEAD').hidden=false;
+    document.getElementById('CONTACT-DONE').hidden=true;
+  }
+  setContactHash(false);
+}
+function contactToCal(){closeContact();openCal();}
+
+function contactMailto(d){
+  var body=[
+    'Namn: '+d.get('fornamn')+' '+d.get('efternamn'),
+    'E-post: '+d.get('email'),
+    'Telefon: '+(d.get('telefon')||'–'),
+    'Klinik/organisation: '+d.get('organisation'),
+    'Klinikstorlek: '+(d.get('klinikstorlek')||'–'),
+    'Land: '+d.get('land'),
+    '',
+    'Meddelande:',
+    d.get('meddelande')
+  ].join('\n');
+  return 'mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('Kontaktförfrågan – '+d.get('organisation'))+'&body='+encodeURIComponent(body);
+}
+
+function showContactDone(viaMail,d){
+  document.getElementById('CONTACT-FORM').hidden=true;
+  document.getElementById('CONTACT-HEAD').hidden=true;
+  document.getElementById('CONTACT-DONE-TITLE').textContent=(viaMail?'Nästan klart, ':'Tack, ')+d.get('fornamn')+'!';
+  document.getElementById('CONTACT-DONE-TEXT').textContent=viaMail
+    ?'Ditt e-postprogram har öppnats med meddelandet ifyllt – tryck på Skicka där så når det oss. Öppnades inget? Mejla oss direkt på '+CONTACT_EMAIL+'.'
+    :'Vi har tagit emot ditt meddelande och återkommer till '+d.get('email')+'.';
+  document.getElementById('CONTACT-DONE').hidden=false;
+  document.querySelector('.contact-card').scrollIntoView({block:'start'});
+}
+
+document.getElementById('CONTACT-FORM').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=e.target,d=new FormData(f),err=document.getElementById('CONTACT-ERR');
+  err.hidden=true;
+  // Honeypot: fylls bara i av spambottar – låtsas att det gick bra
+  if(d.get('_gotcha')){showContactDone(false,d);return;}
+  if(!CONTACT_ENDPOINT){
+    location.href=contactMailto(d);
+    showContactDone(true,d);
+    return;
+  }
+  var btn=f.querySelector('.cf-submit');
+  btn.disabled=true;btn.textContent='Skickar…';
+  fetch(CONTACT_ENDPOINT,{method:'POST',body:d,headers:{Accept:'application/json'}})
+    .then(function(r){if(!r.ok)throw new Error(r.status);showContactDone(false,d);})
+    .catch(function(){
+      err.innerHTML='Något gick fel och meddelandet skickades inte. Försök igen eller mejla oss på <a href="mailto:'+CONTACT_EMAIL+'">'+CONTACT_EMAIL+'</a>.';
+      err.hidden=false;
+    })
+    .finally(function(){btn.disabled=false;btn.textContent='Skicka';});
+});
+
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  if(document.getElementById('CONTACT').classList.contains('open'))closeContact();
+  else if(document.getElementById('CAL').classList.contains('open'))closeCal();
+});
+
+// Direktlänk: chartsearch.se/#kontakta-oss öppnar formuläret
+if(location.hash==='#kontakta-oss')openContact();
 
 window.addEventListener('scroll',function(){
   document.getElementById('NAV').classList.toggle('scrolled',window.scrollY>20);
